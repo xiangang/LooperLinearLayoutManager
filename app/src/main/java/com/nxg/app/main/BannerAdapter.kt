@@ -6,16 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.nxg.app.widget.R
 
-class BannerAdapter(private val context: Context, private val dataList: List<BannerBean>) :
+class BannerAdapter(
+    private val context: Context,
+    @LayoutRes private val resource: Int,
+    private val dataList: List<BannerBean>
+) :
     RecyclerView.Adapter<BannerAdapter.NumberViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
         return NumberViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_banner, parent, false)
+            LayoutInflater.from(context).inflate(resource, parent, false)
         )
     }
 

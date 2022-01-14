@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.nxg.app.widget.R
 import com.nxg.app.widget.databinding.MainFragmentBinding
 import com.nxg.recyclerview.widget.LooperLinearLayoutManager
 
@@ -38,28 +39,37 @@ class MainFragment : Fragment() {
         val root: View = binding.root
         val bannerRecyclerView = binding.bannerRecyclerview
         val bannerRecyclerViewVertical = binding.bannerRecyclerviewVertical
+        val bannerRecyclerviewRecommend = binding.bannerRecyclerviewRecommend
 
-        val bannerAdapter = BannerAdapter(requireContext(), dataList)
+        val bannerAdapter = BannerAdapter(requireContext(), R.layout.item_banner, dataList)
         bannerRecyclerView.layoutManager = LooperLinearLayoutManager(
             requireContext(), RecyclerView.HORIZONTAL, false
         )
         bannerRecyclerViewVertical.layoutManager = LooperLinearLayoutManager(
             requireContext(), RecyclerView.VERTICAL, false
         )
+        val recommendAdapter = BannerAdapter(requireContext(), R.layout.item_recommend, dataList)
+        bannerRecyclerviewRecommend.layoutManager = LooperLinearLayoutManager(
+            requireContext(), RecyclerView.HORIZONTAL, false
+        )
 
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(bannerRecyclerView)
         val snapHelperVertical = PagerSnapHelper()
         snapHelperVertical.attachToRecyclerView(bannerRecyclerViewVertical)
+        val snapHelperRecommend = PagerSnapHelper()
+        snapHelperRecommend.attachToRecyclerView(bannerRecyclerviewRecommend)
 
         bannerRecyclerView.adapter = bannerAdapter
         bannerRecyclerViewVertical.adapter = bannerAdapter
+        bannerRecyclerviewRecommend.adapter = recommendAdapter
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.bannerList.observe(viewLifecycleOwner, Observer {
+        viewModel.bannerList.observe(viewLifecycleOwner, {
             dataList.clear()
             dataList.addAll(it)
             bannerAdapter.notifyDataSetChanged()
+            recommendAdapter.notifyDataSetChanged()
         })
         return root
     }

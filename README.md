@@ -1,0 +1,2 @@
+# LooperLinearLayoutManager
+基于Android官方LinearLayoutManager源码修改实现的支持无限循环的Ly

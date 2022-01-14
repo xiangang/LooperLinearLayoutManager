@@ -5,6 +5,8 @@
 
 # 2. 效果展示
 
+git太大，压缩的厉害，导致帧率太低，建议下载工程运行查看实际效果。
+
 ![演示图](https://github.com/xiangang/LooperLinearLayoutManager/blob/main/demo.gif)
 
 # 3. 使用方法：

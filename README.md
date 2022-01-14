@@ -10,7 +10,7 @@
 # 3. 使用方法：
 
 第一步：
-在你的根目录中的  build.gradle 文件中，repositories 标签下添加一下代码：
+在你的根目录中的  build.gradle 文件中，repositories 标签下添加jitpack maven仓库：
 
 Add it in your root build.gradle at the end of repositories:
 
@@ -23,13 +23,12 @@ allprojects {
 }
 
 ```
-若使用Gradle 7.0 ，则在setting.gradle中添加
+若使用Gradle 7.0 ，则在setting.gradle中的dependencyResolutionManagement的repositories标签中添加：
 ```
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
-        mavenCentral()
+		...
         maven { url 'https://jitpack.io' }
         ...
     }
@@ -62,7 +61,7 @@ bannerRecyclerViewVertical.layoutManager = LooperLinearLayoutManager(
 ```
 
 
-# 5. 配合PagerSnapHelper使用实现ViewPager的无限滚动功能
+# 5. 配合PagerSnapHelper使用实现类似ViewPager的无限循环功能
 注意，若使用LinearSnapHelper，将由于LinearSnapHelper本身的限制而失去无限循环的能力。因此LooperLinearLayoutManager建议只搭配PagerSnapHelper实现无限循环的效果。若一定要使用LinearSnapHelper，建议新建一个LooperLinearSnapHelper类继承LinearSnapHelper并重写findTargetSnapPosition解除无循环限制。
 
 ```kotlin
